@@ -46,7 +46,7 @@ namespace Tabuleiros
                 throw new TabuleiroException("Posição inválida!");
         }
 
-        internal bool PosicaoValida(PosicaoTabuleiro posicao)
+        private bool PosicaoValida(PosicaoTabuleiro posicao)
         {
             if (posicao.Linha < 0 || posicao.Linha >= Linhas || posicao.Coluna >= Colunas)
                 return false;
