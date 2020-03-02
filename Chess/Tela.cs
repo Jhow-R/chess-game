@@ -1,5 +1,6 @@
 ﻿using System;
 using Tabuleiros;
+using Xadrez;
 
 namespace Chess
 {
@@ -7,9 +8,10 @@ namespace Chess
     {
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
+            Console.WriteLine();
             for (int i = 0; i < tab.Linhas; i++)
             {
-                Console.Write(8 - i + " ");
+                Console.Write("  " + (8 - i) + " ");
                 for (int j = 0; j < tab.Colunas; j++)
                 {
                     if (tab.Peca(i, j) == null)
@@ -23,7 +25,16 @@ namespace Chess
                 Console.WriteLine();
             }
 
-            Console.Write("  A B C D E F G H");
+            Console.WriteLine("    A B C D E F G H \n");
+        }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string aux = Console.ReadLine().ToUpper();
+            char coluna = aux[0];
+            int linha = int.Parse(aux[1] + "");
+
+            return new PosicaoXadrez(coluna, linha);
         }
 
         private static void ImprimirPeca(Peca peca)
@@ -39,6 +50,5 @@ namespace Chess
             }
 
         }
-
     }
 }

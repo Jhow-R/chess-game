@@ -11,27 +11,27 @@ namespace Chess
             
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
+                PartidaXadrez partida = new PartidaXadrez();
 
-                tab.PosicionarPeca(new Torre(tab, Cor.Preta), new PosicaoTabuleiro(0, 0));
-                tab.PosicionarPeca(new Torre(tab, Cor.Preta), new PosicaoTabuleiro(1, 3));
-                tab.PosicionarPeca(new Rei(tab, Cor.Preta), new PosicaoTabuleiro(0, 2));
+                while (!partida.Terminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tab);
 
-                tab.PosicionarPeca(new Rei(tab, Cor.Branca), new PosicaoTabuleiro(3, 5));
+                    Console.Write("Origem: ");
+                    PosicaoTabuleiro origem = Tela.LerPosicaoXadrez().ToPosicao();
 
-                Tela.ImprimirTabuleiro(tab);
+                    Console.Write("Destino: ");
+                    PosicaoTabuleiro destino = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    partida.ExecutaMovimento(origem, destino);
+                        
+                }               
             }
             catch (TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
-
-            /*
-            PosicaoXadrez posicao = new PosicaoXadrez('C', 7);
-
-            Console.WriteLine(posicao);
-            Console.WriteLine(posicao.ToPosicao());
-             */
 
             Console.ReadLine();
         }
