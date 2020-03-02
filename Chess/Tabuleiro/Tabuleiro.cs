@@ -19,18 +19,18 @@ namespace Tabuleiros
             return pecas[linha, coluna];
         }
 
-        public Peca Peca(Posicao posicao)
+        public Peca Peca(PosicaoTabuleiro posicao)
         {
             return pecas[posicao.Linha, posicao.Coluna];
         }
 
-        public bool ExistePeca(Posicao posicao)
+        public bool ExistePeca(PosicaoTabuleiro posicao)
         {
             ValidarPosicao(posicao);
             return Peca(posicao) != null;
         }
 
-        public void PosicionarPeca(Peca peca, Posicao posicao)
+        public void PosicionarPeca(Peca peca, PosicaoTabuleiro posicao)
         {
             if (ExistePeca(posicao))
             {
@@ -40,13 +40,13 @@ namespace Tabuleiros
             peca.Posicao = posicao;
         }
 
-        public void ValidarPosicao(Posicao posicao)
+        public void ValidarPosicao(PosicaoTabuleiro posicao)
         {
             if (!PosicaoValida(posicao))
                 throw new TabuleiroException("Posição inválida!");
         }
 
-        internal bool PosicaoValida(Posicao posicao)
+        internal bool PosicaoValida(PosicaoTabuleiro posicao)
         {
             if (posicao.Linha < 0 || posicao.Linha >= Linhas || posicao.Coluna >= Colunas)
                 return false;

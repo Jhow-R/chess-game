@@ -1,12 +1,12 @@
 ﻿
 namespace Tabuleiros
 {
-    class Posicao
+    class PosicaoTabuleiro
     {
         public int Linha { get; set; }
         public int Coluna { get; set; }
 
-        public Posicao(int linha, int coluna)
+        public PosicaoTabuleiro(int linha, int coluna)
         {
             Linha = linha;
             Coluna = coluna;
