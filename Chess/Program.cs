@@ -35,6 +35,7 @@ namespace Chess
                         Console.WriteLine();
                         Console.Write("Destino: ");
                         PosicaoTabuleiro destino = Tela.LerPosicaoXadrez().ToPosicao();
+                        partida.ValidarPosicaoDestino(origem, destino);
 
                         partida.RealizaJogada(origem, destino);
 
