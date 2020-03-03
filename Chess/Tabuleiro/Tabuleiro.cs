@@ -33,9 +33,8 @@ namespace Tabuleiros
         public void PosicionarPeca(Peca peca, PosicaoTabuleiro posicao)
         {
             if (ExistePeca(posicao))
-            {
                 throw new TabuleiroException("Posição já foi ocupada por uma peça!");
-            }
+
             pecas[posicao.Linha, posicao.Coluna] = peca;
             peca.Posicao = posicao;
         }
@@ -57,9 +56,9 @@ namespace Tabuleiros
                 throw new TabuleiroException("Posição inválida!");
         }
 
-        private bool PosicaoValida(PosicaoTabuleiro posicao)
+        public bool PosicaoValida(PosicaoTabuleiro posicao)
         {
-            if (posicao.Linha < 0 || posicao.Linha >= Linhas || posicao.Coluna >= Colunas)
+            if (posicao.Linha < 0 || posicao.Linha >= Linhas || posicao.Coluna < 0 || posicao.Coluna >= Colunas)
                 return false;
 
             return true;
