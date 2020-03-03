@@ -3,7 +3,7 @@ namespace Tabuleiros
 {
     enum Cor
     {
-        Branca,
-        Preta
+        Branco,
+        Preto
     }
 }

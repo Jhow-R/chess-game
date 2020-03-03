@@ -21,7 +21,7 @@ namespace Chess
         }
 
 
-        public static void imprimirTabuleiro(Tabuleiro tab, bool[,] posicoePossiveis)
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] posicoePossiveis)
         {
 
             ConsoleColor corInicial = Console.BackgroundColor;
@@ -66,7 +66,7 @@ namespace Chess
             }
             else
             {
-                if (peca.Cor == Cor.Branca)
+                if (peca.Cor == Cor.Branco)
                 {
                     Console.Write(peca);
                 }

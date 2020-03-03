@@ -5,16 +5,16 @@ namespace Xadrez
 {
     class PartidaXadrez
     {
-        public Tabuleiro Tabuleiro { get; private  set; }
-        private int turno;
-        private Cor jogadorAtual;
+        public Tabuleiro Tabuleiro { get; private set; }
+        public int Turno { get; private set; }
+        public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; private set; }
 
         public PartidaXadrez()
         {
             Tabuleiro = new Tabuleiro(8, 8);
-            turno = 1;
-            jogadorAtual = Cor.Branca;
+            Turno = 1;
+            JogadorAtual = Cor.Branco;
             Terminada = false;
             colocarPecas();
         }
@@ -27,21 +27,48 @@ namespace Xadrez
             Tabuleiro.PosicionarPeca(p, destino);
         }
 
+        public void RealizaJogada(PosicaoTabuleiro origem, PosicaoTabuleiro destino)
+        {
+            ExecutaMovimento(origem, destino);
+            Turno++;
+            mudaJogador();
+        }
+
+        public void ValidarPosicaoOrigem(PosicaoTabuleiro pos)
+        {
+            if (Tabuleiro.Peca(pos) == null)
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+
+            if (JogadorAtual != Tabuleiro.Peca(pos).Cor)
+                throw new TabuleiroException("A peça de origem escohida não é sua!");
+
+            if (!Tabuleiro.Peca(pos).ExisteMovimentosPossiveis())
+                throw new TabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
+        }
+
+        public void mudaJogador()
+        {
+            if (JogadorAtual == Cor.Branco)
+                JogadorAtual = Cor.Preto;
+            else
+                JogadorAtual = Cor.Branco;
+        }
+
         private void colocarPecas()
         {
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branca), new PosicaoXadrez('C', 1).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branca), new PosicaoXadrez('C', 2).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branca), new PosicaoXadrez('D', 2).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branca), new PosicaoXadrez('E', 2).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branca), new PosicaoXadrez('E', 1).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Rei(Tabuleiro, Cor.Branca), new PosicaoXadrez('D', 1).ToPosicao());
-            
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preta), new PosicaoXadrez('C', 7).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preta), new PosicaoXadrez('C', 8).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preta), new PosicaoXadrez('D', 7).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preta), new PosicaoXadrez('E', 7).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preta), new PosicaoXadrez('E', 8).ToPosicao());
-            Tabuleiro.PosicionarPeca(new Rei(Tabuleiro, Cor.Preta), new PosicaoXadrez('D', 8).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branco), new PosicaoXadrez('C', 1).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branco), new PosicaoXadrez('C', 2).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branco), new PosicaoXadrez('D', 2).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branco), new PosicaoXadrez('E', 2).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Branco), new PosicaoXadrez('E', 1).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Rei(Tabuleiro, Cor.Branco), new PosicaoXadrez('D', 1).ToPosicao());
+
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preto), new PosicaoXadrez('C', 7).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preto), new PosicaoXadrez('C', 8).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preto), new PosicaoXadrez('D', 7).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preto), new PosicaoXadrez('E', 7).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Torre(Tabuleiro, Cor.Preto), new PosicaoXadrez('E', 8).ToPosicao());
+            Tabuleiro.PosicionarPeca(new Rei(Tabuleiro, Cor.Preto), new PosicaoXadrez('D', 8).ToPosicao());
         }
     }
 }
