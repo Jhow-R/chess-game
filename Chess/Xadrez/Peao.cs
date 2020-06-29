@@ -5,9 +5,9 @@ namespace Chess.Xadrez
 {
     class Peao : Peca
     {
-        //private PartidaXadrez partida;
+        private PartidaXadrez partida;
 
-        public Peao(Tabuleiro tab, Cor cor) : base(tab, cor) {}
+        public Peao(Tabuleiro tab, Cor cor, PartidaXadrez partida) : base(tab, cor) { this.partida = partida; }
 
         private bool ExisteInimigo(PosicaoTabuleiro pos)
         {
@@ -45,6 +45,21 @@ namespace Chess.Xadrez
                 if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos))
                     mat[pos.Linha, pos.Coluna] = true;
 
+                // Jogada especial: En Passant
+                if (Posicao.Linha == 3)
+                {
+                    PosicaoTabuleiro esquerda = new PosicaoTabuleiro(Posicao.Linha, Posicao.Coluna - 1);
+                    if (Tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tabuleiro.Peca(esquerda) == partida.EnPassant)
+                    {
+                        mat[esquerda.Linha - 1, esquerda.Coluna] = true;
+                    }
+
+                    PosicaoTabuleiro direita = new PosicaoTabuleiro(Posicao.Linha, Posicao.Coluna + 1);
+                    if (Tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && Tabuleiro.Peca(direita) == partida.EnPassant)
+                    {
+                        mat[direita.Linha - 1, direita.Coluna] = true;
+                    }
+                }
             }
             else
             {
@@ -56,7 +71,7 @@ namespace Chess.Xadrez
                 PosicaoTabuleiro p2 = new PosicaoTabuleiro(Posicao.Linha + 1, Posicao.Coluna);
                 if (Tabuleiro.PosicaoValida(p2) && EstaLivre(p2) && Tabuleiro.PosicaoValida(pos) && EstaLivre(pos) && QtdMovimentos == 0)
                     mat[pos.Linha, pos.Coluna] = true;
-                
+
                 pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
                 if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos))
                     mat[pos.Linha, pos.Coluna] = true;
@@ -64,6 +79,22 @@ namespace Chess.Xadrez
                 pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
                 if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos))
                     mat[pos.Linha, pos.Coluna] = true;
+
+                // Jogada especial: En Passant
+                if (Posicao.Linha == 4)
+                {
+                    PosicaoTabuleiro esquerda = new PosicaoTabuleiro(Posicao.Linha, Posicao.Coluna - 1);
+                    if (Tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tabuleiro.Peca(esquerda) == partida.EnPassant)
+                    {
+                        mat[esquerda.Linha + 1, esquerda.Coluna] = true;
+                    }
+
+                    PosicaoTabuleiro direita = new PosicaoTabuleiro(Posicao.Linha, Posicao.Coluna + 1);
+                    if (Tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && Tabuleiro.Peca(direita) == partida.EnPassant)
+                    {
+                        mat[direita.Linha + 1, direita.Coluna] = true;
+                    }
+                }
             }
 
             return mat;
