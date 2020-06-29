@@ -14,12 +14,19 @@ namespace Game
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.Turno);
-            Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
 
-            if (partida.EmXeque)
+            if (!partida.EstaTerminada)
             {
-                Console.WriteLine("XEQUE!");
-            }            
+                Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
+
+                if (partida.EmXeque)
+                    Console.WriteLine("XEQUE!");
+            }
+            else
+            {
+                Console.WriteLine("XEQUE-MATE!");
+                Console.WriteLine("Vencedor: " + partida.JogadorAtual);
+            }
         }
 
         public static void ImprimirPecasCapturadas(PartidaXadrez partida)
