@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Tabuleiros;
 using Xadrez;
 
-namespace Chess
+namespace Game
 {
     class Tela
     {
@@ -15,6 +15,11 @@ namespace Chess
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.Turno);
             Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
+
+            if (partida.EmXeque)
+            {
+                Console.WriteLine("XEQUE!");
+            }            
         }
 
         public static void ImprimirPecasCapturadas(PartidaXadrez partida)
@@ -66,13 +71,10 @@ namespace Chess
                 for (int j = 0; j < tab.Colunas; j++)
                 {
                     if (posicoePossiveis[i, j])
-                    {
                         Console.BackgroundColor = corAlterada;
-                    }
                     else
-                    {
                         Console.BackgroundColor = corInicial;
-                    }
+
                     ImprimirPeca(tab.Peca(i, j));
                     Console.BackgroundColor = corInicial;
                 }

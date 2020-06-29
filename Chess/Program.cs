@@ -2,7 +2,7 @@
 using Tabuleiros;
 using Xadrez;
 
-namespace Chess
+namespace Game
 {
     class Program
     {
@@ -12,7 +12,7 @@ namespace Chess
             {
                 PartidaXadrez partida = new PartidaXadrez();
 
-                while (!partida.Terminada)
+                while (!partida.EstaTerminada)
                 {
                     try
                     {
@@ -35,7 +35,7 @@ namespace Chess
                         PosicaoTabuleiro destino = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoDestino(origem, destino);
 
-                        partida.RealizaJogada(origem, destino);
+                        partida.RealizarJogada(origem, destino);
 
                     }
                     catch (TabuleiroException e)

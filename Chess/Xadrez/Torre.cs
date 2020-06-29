@@ -18,7 +18,7 @@ namespace Xadrez
             return "T";
         }
 
-        private bool podeMover(PosicaoTabuleiro pos)
+        private bool PodeMover(PosicaoTabuleiro pos)
         {
             Peca p = Tabuleiro.Peca(pos);
             return p == null || p.Cor != Cor;
@@ -32,7 +32,7 @@ namespace Xadrez
 
             // Acima da torre
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(pos) && podeMover(pos))
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
@@ -44,7 +44,7 @@ namespace Xadrez
 
             // Abaixo da torre
             pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(pos) && podeMover(pos))
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
@@ -56,7 +56,7 @@ namespace Xadrez
 
             // Direita da torre
             pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(pos) && podeMover(pos))
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
@@ -68,7 +68,7 @@ namespace Xadrez
 
             // Esquerda da torre
             pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(pos) && podeMover(pos))
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
