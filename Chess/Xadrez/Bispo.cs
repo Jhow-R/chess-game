@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Tabuleiros;
 
-namespace Xadrez
+namespace Chess.Xadrez
 {
-    class Torre : Peca
+    class Bispo : Peca
     {
-        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor) { }
+        public Bispo(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor) { }
 
         private bool PodeMover(PosicaoTabuleiro pos)
         {
@@ -19,64 +15,63 @@ namespace Xadrez
 
         public override bool[,] MovimentosPossiveis()
         {
-            bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
-
+            bool[,] mat = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
             PosicaoTabuleiro pos = new PosicaoTabuleiro(0, 0);
 
-            // Acima da torre
-            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
+            // NO
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.Linha, pos.Coluna] = true;
+                mat[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.Linha = pos.Linha - 1;
+                pos.DefinirValores(pos.Linha - 1, pos.Coluna - 1);
             }
 
-            // Abaixo da torre
-            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
+            // NE
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
             while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.Linha, pos.Coluna] = true;
+                mat[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.Linha = pos.Linha + 1;
+                pos.DefinirValores(pos.Linha - 1, pos.Coluna + 1);
             }
 
-            // Direita da torre
-            pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+            // SE
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
             while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.Linha, pos.Coluna] = true;
+                mat[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.Coluna = pos.Coluna + 1;
+                pos.DefinirValores(pos.Linha + 1, pos.Coluna + 1);
             }
 
-            // Esquerda da torre
-            pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
+            // SO
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.Linha, pos.Coluna] = true;
+                mat[pos.Linha, pos.Coluna] = true;
                 if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.Coluna = pos.Coluna - 1;
+                pos.DefinirValores(pos.Linha + 1, pos.Coluna - 1);
             }
 
-            return matriz;
+            return mat;
         }
 
         public override string ToString()
         {
-            return "T";
+            return "B";
         }
     }
 }

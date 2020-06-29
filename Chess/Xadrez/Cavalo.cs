@@ -1,12 +1,10 @@
 ﻿using Tabuleiros;
 
-namespace Xadrez
+namespace Chess.Xadrez
 {
-    class Rei : Peca
+    class Cavalo : Peca
     {
-        public Rei(Tabuleiro tab, Cor cor) : base(tab, cor)
-        {
-        }
+        public Cavalo(Tabuleiro tab, Cor cor) : base(tab, cor) { }
 
         private bool PodeMover(PosicaoTabuleiro pos)
         {
@@ -20,67 +18,53 @@ namespace Xadrez
 
             PosicaoTabuleiro pos = new PosicaoTabuleiro(0, 0);
 
-            // Acima do rei
-            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 2);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha - 2, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha - 2, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 2);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 2);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha + 2, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha + 2, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            {
+                mat[pos.Linha, pos.Coluna] = true;
+            }
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 2);
             if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            // Nordeste do rei
-            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            // Direita do rei
-            pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            // Sudeste do rei
-            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            // Sudoeste do rei
-            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            // Abaixo do rei
-            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            // Esquerda do rei
-            pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            // Noroeste do rei
-            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
-            {
-                mat[pos.Linha, pos.Coluna] = true;
-            }
             return mat;
         }
 
         public override string ToString()
         {
-            return "R";
+            return "C";
         }
     }
 }
